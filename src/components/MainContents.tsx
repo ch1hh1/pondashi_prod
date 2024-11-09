@@ -20,13 +20,11 @@ const MainContents = () => {
     border: solid 1px #aaaa00;
     width:50%;
     height: 85vh;
-    padding: 1em 2.5em 0 1em;
+    padding: 1em;
     overflow-x: scroll;
     display: flex;
     flex-direction: column;
-    &::-webkit-scrollbar {
-      width: 10px;
-      }
+    scrollbar-width: none;
   `
 
   // 指定の音源を1〜n個渡す
@@ -36,15 +34,12 @@ const MainContents = () => {
     <>
       <MainContentsWrap>
         <MainContentArea>
-          <StandardAudioPlayerPanel sounds={[sound1]}/>
-          {[...Array(100)].map(i =>
-            <p>{i = 'bgm'}</p>
-          )}
+          <StandardAudioPlayerPanel
+            sounds={[sound1]}
+            defVol={0}
+          />
         </MainContentArea>
         <MainContentArea>
-          {[...Array(100)].map(i =>
-            <p>{i = 'se'}</p>
-          )}
         </MainContentArea>
       </MainContentsWrap>
     </>

@@ -13,7 +13,7 @@ type Props = {
 const AudioControlButton = ({ icon, onClick }: Props) => {
 
   const ControlButton = styled.button`
-    width: 22%;
+    width: 45%;
     padding: 0.5em 0 0.5em 0;
   `
 
