@@ -1,3 +1,12 @@
+# pondashi_prod
+ポン出し本番用
+
+- 構成
+  - Vite React TypeScriptテンプレート
+  - MUI、emotion（MUI同梱）、use-soundを使用
+
+---
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
