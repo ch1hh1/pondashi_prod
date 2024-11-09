@@ -1,17 +1,21 @@
-/** @jsxImportSource @emotion/react */
-import { jsx, css } from '@emotion/react';
 import styled from '@emotion/styled';
+import Header from './components/Header';
+import MainContents from './components/MainContents';
 
+/**
+ * React実装のルート
+ */
 function App() {
   const Wrapeer = styled.div`
-    margin:0;
-    background-color: #a0c0f0
+    display: flex;
+    flex-direction: column;
   `
 
   return (
     <>
       <Wrapeer>
-        <p>first</p>
+        <Header />
+        <MainContents />
       </Wrapeer>
     </>
   )
