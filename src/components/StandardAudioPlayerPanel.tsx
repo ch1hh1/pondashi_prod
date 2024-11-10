@@ -16,6 +16,7 @@ import { IoStopSharp } from "react-icons/io5";
 import { delay } from '../utilFunction/delay';
 import { VOLUME_DECREMENT_SEC, VOLUME_INCREMENT_SEC } from '../common';
 import { checkVol } from '../utilFunction/checkVol';
+import { calculateStepToGoal } from '../utilFunction/calculateStepToGoal';
 
 type Props = {
   sounds: string[],
@@ -78,50 +79,30 @@ const StandardAudioPlayerPanel = ({ sounds, defVol }: Props) => {
   }
 
   // フェードイン
-  const fadeIn = (beforeVolume: number, volumeGoal: number): number => {
-    // 目標値と現在値の差の10%を埋めていく
-    console.log(`beforeVolume ${beforeVolume}`);
-    console.log(`volumeGoal ${volumeGoal}`);
-
-    const incVolume = beforeVolume + ((volumeGoal - beforeVolume) / 10);
-    console.log(`incVolume ${incVolume}`);
-    setVolume(incVolume);
-    return incVolume;
-  }
-  const handleFadeIn = async (nowVolume: number) => {
-    // 【!】再生状態なら何もしない
-    if (isPlaying) return;
-    // 最初、（ボリュームを0に設定）・再生・再生状態
-    setIsPlaying(true);
+  const handleFadeIn = async (nowVolume: number, volumeGoal: number) => {
+    // 0できたとして
+    setVolume(0);
     play();
-
-    // let cnt = 0;
-    // let res: boolean;
-    // do {
-    //   res = checkVol(volume, 0)
-    //   await delay(100);
-    //   cnt++;
-    //   console.log(cnt);
-    // } while (!res && cnt < 100)
-    console.log(`nowVol ${nowVolume}`);
-
-
-    // フェードイン１回
-    const adjVol = fadeIn(volume, 0.2);
-    do{
-      fadeIn(adjVol, 0.2);
+    setIsPlaying(true);
+    // 目標値までの差分を10%ずつうめる
+    const volumeIncrementStep = (volumeGoal - nowVolume) / 20
+    // 現在値に差分10%を加算した値を新たにボリュームに設定
+    const incVolume = nowVolume + volumeIncrementStep;
+    console.log(incVolume);
+    setVolume(incVolume);
+    if (incVolume < volumeGoal * 0.95) {
+      // もし閾値未満なら再帰
       await delay(VOLUME_INCREMENT_SEC);
-    }while(volume < 0.2 * 0.95)
-    // 目標値の95%未満なら遅延後にフェードイン継続
-      // fadeIn(adjVol, defVol);
-
-      // 目標値の95%以上ならボリュームを目標値に設定する
-
+      handleFadeIn(incVolume, volumeGoal);
+    } else {
+      // 閾値以上ならボリュームをゴールに設定
+      setVolume(volumeGoal);
+    }
   }
 
   // ------音声コントロール------------------------------------------------------------
   const [isPlaying, setIsPlaying] = useState(false);
-  const [play, { stop }] = useSound(sounds[0], { volume }); // volumeはショートハンドな書き方してるだけ
+  const [play, { stop, sound }] = useSound(sounds[0], { volume }); // volumeはショートハンドな書き方してるだけ
 
   const handlePlaying = () => {
     if (isPlaying) {
@@ -139,7 +120,7 @@ const StandardAudioPlayerPanel = ({ sounds, defVol }: Props) => {
       <StandardAudioPlayerPanelWrap>
         <p>タイトル</p>
 
-        {/* <Box sx={{ width: '100%' }}>
+        <Box sx={{ width: '100%' }}>
           <Stack spacing={2} direction="row" sx={{ alignItems: 'center', mb: 1 }}>
             <VolumeDown />
             <Slider
@@ -151,7 +132,7 @@ const StandardAudioPlayerPanel = ({ sounds, defVol }: Props) => {
               marks min={0} max={1} />
             <VolumeUp />
           </Stack>
-        </Box> */}
+        </Box>
         <p>
           {volume}
         </p>
@@ -166,7 +147,9 @@ const StandardAudioPlayerPanel = ({ sounds, defVol }: Props) => {
             onClick=
             {isPlaying
               ? (() => handleFadeOut(volume))
-              : (() => handleFadeIn(volume))
+              : (() => {
+                handleFadeIn(volume, 0.2)
+              })
             }
           />
         </AudioControlButtonWrap>
