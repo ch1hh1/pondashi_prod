@@ -2,21 +2,21 @@ import { useState } from 'react';
 import styled from '@emotion/styled';
 import AudioControlButton from './AudioControlButton';
 import useSound from 'use-sound';
-import Box from '@mui/material/Box/Box';
-import Stack from '@mui/material/Stack/Stack';
-import VolumeDown from '@mui/icons-material/VolumeDown';
-import VolumeUp from '@mui/icons-material/VolumeUp';
-import Slider from '@mui/material/Slider/Slider';
+// import Box from '@mui/material/Box/Box';
+// import Stack from '@mui/material/Stack/Stack';
+// import VolumeDown from '@mui/icons-material/VolumeDown';
+// import VolumeUp from '@mui/icons-material/VolumeUp';
+// import Slider from '@mui/material/Slider/Slider';
+import { delay } from '../utilFunction/delay';
+// import { VOLUME_DECREMENT_SEC, VOLUME_INCREMENT_SEC } from '../common';
+// import { checkVol } from '../utilFunction/checkVol';
+// import { calculateStepToGoal } from '../utilFunction/calculateStepToGoal';
 
 // アイコン群
 import { FaPlay } from "react-icons/fa";
 import { FaTurnUp } from "react-icons/fa6";
 import { FaTurnDown } from "react-icons/fa6";
 import { IoStopSharp } from "react-icons/io5";
-import { delay } from '../utilFunction/delay';
-import { VOLUME_DECREMENT_SEC, VOLUME_INCREMENT_SEC } from '../common';
-import { checkVol } from '../utilFunction/checkVol';
-import { calculateStepToGoal } from '../utilFunction/calculateStepToGoal';
 
 type Props = {
   sounds: string[],
@@ -47,79 +47,55 @@ const StandardAudioPlayerPanel = ({ sounds, defVol }: Props) => {
     flex-direction: row;
     justify-content: space-between;
   `
-  // ------音量コントロール-----------------------------------------------------
-  const [volume, setVolume] = useState((() => defVol));
-  // 手動変更時
-  const handleVolumeChange = (event: Event, newValue: number | number[]) => {
-    // eventは必ず要るっぽい
-    console.log('change');
-    setVolume(newValue as number);
-  };
 
-  // フェードアウト
-  const handleFadeOut = async (nowVolume: number) => {
-    // 【!】停止状態なら何もしない
-    if (!isPlaying) return;
-    // 現在のボリュームを10%ずつ下げる（最初の減り具合が大きい）
-    const volumeDecrementStep = nowVolume / 10;
-    // ボリューム減算
-    const decVolume = nowVolume - volumeDecrementStep;
-    console.log(decVolume);
-    setVolume(decVolume);
-    if (decVolume >= 0.01) {
-      // もしボリュームが閾値以上なら一定遅延後に再帰
-      await delay(VOLUME_DECREMENT_SEC);
-      handleFadeOut(decVolume);
-    } else {
-      // もしボリュームが閾値未満ならボリューム0・停止・停止状態
-      stop();
-      setVolume(0);
-      setIsPlaying(false);
-    }
-  }
-
-  // フェードイン
-  const handleFadeIn = async (nowVolume: number, volumeGoal: number) => {
-    // 0できたとして
-    setVolume(0);
-    play();
-    setIsPlaying(true);
-    // 目標値までの差分を10%ずつうめる
-    const volumeIncrementStep = (volumeGoal - nowVolume) / 20
-    // 現在値に差分10%を加算した値を新たにボリュームに設定
-    const incVolume = nowVolume + volumeIncrementStep;
-    console.log(incVolume);
-    setVolume(incVolume);
-    if (incVolume < volumeGoal * 0.95) {
-      // もし閾値未満なら再帰
-      await delay(VOLUME_INCREMENT_SEC);
-      handleFadeIn(incVolume, volumeGoal);
-    } else {
-      // 閾値以上ならボリュームをゴールに設定
-      setVolume(volumeGoal);
-    }
-  }
+  // 文字情報スタイル
+  const DispInfomationWrap = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  `
 
   // ------音声コントロール------------------------------------------------------------
   const [isPlaying, setIsPlaying] = useState(false);
-  const [play, { stop, sound }] = useSound(sounds[0], { volume }); // volumeはショートハンドな書き方してるだけ
+  const [play, { stop, sound ,duration}] = useSound(sounds[0]); // volumeはショートハンドな書き方してるだけ
 
   const handlePlaying = () => {
     if (isPlaying) {
+      // 停止
+      sound.volume(0);
       setIsPlaying(false);
       stop();
     } else {
+      // 再生
+      sound.volume(defVol);
       setIsPlaying(true);
       play();
     }
   }
+  // ------音量コントロール-----------------------------------------------------
+  // const [volume, setVolume] = useState((() => defVol));
+  // // 手動変更時
+  // const handleVolumeChange = (event: Event, newValue: number | number[]) => {
+  //   // eventは必ず要るっぽい
+  //   console.log('change');
+  //   setVolume(newValue as number);
+  // };
+
+  // -------曲長の表示-------------------------------------------------------------
+  const dispDurationMin = duration ? Math.floor(duration / 1000 / 60) : '';
+  const dispDurationSec = duration ? Math.round(duration % (1000 * 60) / 1000) : '';
+  // -------フェード中に操作させない------------------------------------------
+  const [isFading, setIsFading] = useState(false);
   // -----------------------------------------------------------------------------
 
   return (
     <>
       <StandardAudioPlayerPanelWrap>
-        <p>タイトル</p>
-
+        <DispInfomationWrap>
+          <p>タイトル</p>
+          <p>{dispDurationMin}:{dispDurationSec}</p>
+        </DispInfomationWrap>
+        {/* 
         <Box sx={{ width: '100%' }}>
           <Stack spacing={2} direction="row" sx={{ alignItems: 'center', mb: 1 }}>
             <VolumeDown />
@@ -132,23 +108,38 @@ const StandardAudioPlayerPanel = ({ sounds, defVol }: Props) => {
               marks min={0} max={1} />
             <VolumeUp />
           </Stack>
-        </Box>
-        <p>
-          {volume}
-        </p>
+        </Box> */}
+        <p>音量初期値:{defVol}</p>
 
         <AudioControlButtonWrap>
           <AudioControlButton
             icon={isPlaying ? <IoStopSharp /> : <FaPlay />}
+            isFading={isFading}
             onClick={handlePlaying}
           />
           <AudioControlButton
             icon={isPlaying ? <FaTurnDown /> : <FaTurnUp />}
+            isFading={isFading}
             onClick=
             {isPlaying
-              ? (() => handleFadeOut(volume))
-              : (() => {
-                handleFadeIn(volume, 0.2)
+              ? (async () => {
+                // フェードアウト停止
+                setIsFading(true);
+                sound.fade(0.2, 0, 5000);
+                await delay(5000);
+                setIsFading(false);
+                // もしフェードアウト中に別で停止状態になったらフェードアウト処理をリセットしないといけない
+                // howlerjsだけで行った方がよかったんでない？
+                if (isPlaying) {
+                  handlePlaying() //  再生状態の時のみ停止操作
+                };
+              })
+              : (async () => {
+                handlePlaying(); // 音量が初期値で再生されるけど速攻でフェード処理入る（ひでぇ）
+                setIsFading(true);
+                sound.fade(0, 0.2, 7000);
+                await delay(7000);
+                setIsFading(false);
               })
             }
           />

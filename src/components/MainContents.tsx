@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import StandardAudioPlayerPanel from './StandardAudioPlayerPanel';
 //-----音声import---------
-import sound1 from '../assets/ceuxQuiMarchentDeboutDontStandByMe_SStrongRemix_mstr_1103.mp3';
+import sound1 from '../assets/girl_Meets_Jazz_1103.mp3';
 //-----------------------
 
 
@@ -36,7 +36,7 @@ const MainContents = () => {
         <MainContentArea>
           <StandardAudioPlayerPanel
             sounds={[sound1]}
-            defVol={0}
+            defVol={0.2}
           />
         </MainContentArea>
         <MainContentArea>

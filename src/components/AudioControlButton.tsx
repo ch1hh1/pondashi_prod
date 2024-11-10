@@ -4,13 +4,14 @@ import { IconContext } from 'react-icons'
 
 type Props = {
   icon:JSX.Element;
+  isFading: boolean;
   onClick: () => void;
 }
 
 /**
  * 音声再生をコントロールする汎用ボタン
  */
-const AudioControlButton = ({ icon, onClick }: Props) => {
+const AudioControlButton = ({ icon, isFading, onClick }: Props) => {
 
   const ControlButton = styled.button`
     width: 45%;
@@ -25,7 +26,7 @@ const AudioControlButton = ({ icon, onClick }: Props) => {
 
   return (
     <>
-      <ControlButton onClick={onClick}>
+      <ControlButton onClick={onClick} disabled={isFading}>
         {iconContainer}
       </ControlButton>
 
