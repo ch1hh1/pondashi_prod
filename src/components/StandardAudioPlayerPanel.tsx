@@ -18,10 +18,11 @@ import { FaTurnUp } from "react-icons/fa6";
 import { FaTurnDown } from "react-icons/fa6";
 import { IoStopSharp } from "react-icons/io5";
 
-type Props = {
+export type AudioProps = {
   sounds: string[],
-  // isSe: boolean,
   defVol: number;
+  dispName: string;
+  bgColor: 'case1' | 'case2' | 'case3' | 'case4' | 'case5' | 'case6' | 'se',
 }
 
 /**
@@ -29,7 +30,19 @@ type Props = {
  * 音源は1個以上N個以下受け取れる
  * 1曲目が終了したら2曲目を流す、それをクロスフェード……できる？
  */
-const StandardAudioPlayerPanel = ({ sounds, defVol }: Props) => {
+const StandardAudioPlayerPanel = ({ sounds, defVol, dispName, bgColor }: AudioProps) => {
+  // パネル背景色
+  const bgColors = {
+    case1: '#9dc2e3',
+    case2: '#fae4d6',
+    case3: '#e2efda',
+    case4: '#d4d8f9',
+    case5: '#d0cece',
+    case6: '#e8cfcb',
+    se: '#beb5c9',
+  }
+  const bgChoseColor = bgColors[bgColor];
+
   // パネル全体のスタイル
   const StandardAudioPlayerPanelWrap = styled.div`
     width: calc(100% -2em);
@@ -37,7 +50,6 @@ const StandardAudioPlayerPanel = ({ sounds, defVol }: Props) => {
     margin: 0.5em 0 0.5em 0;
     display: flex;
     flex-direction: column;
-    background-color: thistle;
   `
 
   // ボタン横配置部分のスタイル
@@ -57,7 +69,7 @@ const StandardAudioPlayerPanel = ({ sounds, defVol }: Props) => {
 
   // ------音声コントロール------------------------------------------------------------
   const [isPlaying, setIsPlaying] = useState(false);
-  const [play, { stop, sound ,duration}] = useSound(sounds[0]); // volumeはショートハンドな書き方してるだけ
+  const [play, { stop, sound, duration }] = useSound(sounds[0]); // volumeはショートハンドな書き方してるだけ
 
   const handlePlaying = () => {
     if (isPlaying) {
@@ -90,9 +102,9 @@ const StandardAudioPlayerPanel = ({ sounds, defVol }: Props) => {
 
   return (
     <>
-      <StandardAudioPlayerPanelWrap>
+      <StandardAudioPlayerPanelWrap style={{ backgroundColor: bgChoseColor }}>
         <DispInfomationWrap>
-          <p>タイトル</p>
+          <p>{dispName}</p>
           <p>{dispDurationMin}:{dispDurationSec}</p>
         </DispInfomationWrap>
         {/* 

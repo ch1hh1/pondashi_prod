@@ -6,7 +6,7 @@ import styled from '@emotion/styled';
 const Header = () => {
 
   const HeaderWrap = styled.div`
-    background-color: #f0b59a;
+    background-color: #dedbda;
     display: flex;
     flex-direction: row;
   `;
