@@ -120,7 +120,7 @@ const StandardAudioPlayerPanel = ({ sounds, defVol, dispName, bgColor }: AudioPr
               ? (async () => {
                 // フェードアウト停止
                 setIsFading(true);
-                sound.fade(0.2, 0, 1000 * 30);
+                sound.fade(defVol, 0, 1000 * 30);
                 await delay(1000 * 30);
                 setIsFading(false);
                 // もしフェードアウト中に別で停止状態になったらフェードアウト処理をリセットしないといけない
@@ -133,7 +133,7 @@ const StandardAudioPlayerPanel = ({ sounds, defVol, dispName, bgColor }: AudioPr
                 // フェードイン
                 handlePlaying(); // 音量が初期値で再生されるけど速攻でフェード処理入る（ひでぇ）
                 setIsFading(true);
-                sound.fade(0, 0.2, 1000 * 25);
+                sound.fade(0, defVol, 1000 * 25);
                 await delay(1000 * 25);
                 setIsFading(false);
               })
