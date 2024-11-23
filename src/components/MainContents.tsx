@@ -1,14 +1,14 @@
 import styled from '@emotion/styled';
 import StandardAudioPlayerPanel from './StandardAudioPlayerPanel';
+
 //-----音声import---------
-import sound1 from '../assets/TOTEMO_HEN_NA_OTO.mp3';
+// import sound1 from '../assets/TOTEMO_HEN_NA_OTO.mp3';
 //-----------------------
-
-
 /**
  * 音声コンテンツをまとめる最上位
  */
 const MainContents = () => {
+
   // 音声コンテンツ全体のスタイル
   const MainContentsWrap = styled.div`
     display: flex;
@@ -39,23 +39,16 @@ const MainContents = () => {
 
   // BGMのライン
   const bgms = (
-    <StandardAudioPlayerPanel
-      sounds={[sound1]}
-      defVol={0.2}
-      dispName={'サンプル'}
-      bgColor={'case1'}
-    />
+    <>
+      {/* ここにスクリプトで作ったコードを貼り付け */}
+    </>
   );
 
   const ses = (
-    <StandardAudioPlayerPanel
-      sounds={[sound1]}
-      defVol={0.2}
-      dispName={'サンプル'}
-      bgColor={'se'}
-    />
+    <>
+      {/* ここにスクリプトで作ったコードを貼り付け */}
+    </>
   );
-
 
   return (
     <>
