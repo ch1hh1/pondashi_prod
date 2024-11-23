@@ -12,7 +12,7 @@ var makeComponentString = function (files) {
     var str = '';
     for (var _i = 0, files_1 = files; _i < files_1.length; _i++) {
         var file = files_1[_i];
-        var tempStr = "\n<StandardAudioPlayerPanel\n  sounds={[".concat(type).concat(files.indexOf(file), "]}\n  defVol={0.2}\n  dispName={'").concat(file.split('_').slice(0, -1).join('_'), "'}\n  bgColor={'case").concat(file.split('_')[0], "'}\n/>");
+        var tempStr = "\n<StandardAudioPlayerPanel\n  sounds={[".concat(type).concat(files.indexOf(file), "]}\n  defVol={0.2}\n  dispName={'").concat(file, "'}\n  bgColor={'case").concat(file.split('_')[0], "'}\n/>");
         str = str + tempStr;
     }
     return str;
