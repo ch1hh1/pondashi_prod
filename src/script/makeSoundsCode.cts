@@ -15,8 +15,8 @@ const makeComponentString = (files: string[]) => {
 <StandardAudioPlayerPanel
   sounds={[sound${files.indexOf(file)}]}
   defVol={0.2}
-  dispName={'${file}'}
-  bgColor={'se'}
+  dispName={'${file.split('_').slice(0,-1).join('_')}'}
+  bgColor={'case${file.split('_')[0]}'}
 />`
     str = str + tempStr;
   }
