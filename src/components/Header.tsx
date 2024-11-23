@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import HeaderTimer from './HeaderTimer';
 
 /**
  * メモと時計を持つヘッダー
@@ -16,18 +17,18 @@ const Header = () => {
     padding: 1em;
     color: #303030;
     font-size: 0.8em;
+    display: flex;
+    flex-direction: column;
   `;
 
   return (
     <>
       <HeaderWrap>
         <HeaderArea>
-          <p>メモ</p>
-          <p>停止→再生すると曲頭に戻ります</p>
-          <p>フェードインは0から始まるから安心しな</p>
+          <p>停止→再生すると曲頭に戻る。フェードインは必ず0から始まる。曲変えは次のイン→現在をアウト の順に操作する。緊急ボタンは音量を0にするだけで再生を止めない。赤枠は再生中。</p>
         </HeaderArea>
         <HeaderArea>
-          <h2>タイマー</h2>
+          <HeaderTimer />
         </HeaderArea>
       </HeaderWrap>
     </>
