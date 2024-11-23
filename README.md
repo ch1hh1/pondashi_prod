@@ -3,7 +3,14 @@
 
 - 構成
   - Vite React TypeScriptテンプレート
-  - MUI、emotion（MUI同梱）、use-soundを使用
+  - MUI、emotion（MUI同梱）、~~use-soundを使用~~
+
+使用方法
+1. src/assets/bgmまたはassets/seフォルダに音声ファイルを入れる（.mp3のみ動作確認済み）
+  - 音声ファイルはファイル名頭に`1_`,`2_`,`3_`,`4_`,`5_`,`6_`,`7_`,`se_`のどれかをつけること
+1. src/scriptフォルダのスクリプトで、音声ファイルのimport文とコンポーネント呼び出し文を生成する
+1. src/components/MainContents.tsxにコンポーネント呼び出し文とimport文を貼り付ける
+1. npm run devで開発サーバを起動して使う
 
 ---
 
