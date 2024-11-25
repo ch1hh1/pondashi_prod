@@ -13,9 +13,9 @@ const makeComponentString = (files: string[]) => {
   for (const file of files) {
     const tempStr = `
 <StandardAudioPlayerPanel
-  sounds={[sound${files.indexOf(file)}]}
+  sounds={[${type}${files.indexOf(file)}]}
   defVol={0.2}
-  dispName={'${file.split('_').slice(0,-1).join('_')}'}
+  dispName={'${file}'}
   bgColor={'case${file.split('_')[0]}'}
 />`
     str = str + tempStr;
@@ -27,7 +27,7 @@ const makeImportString = (files: string[]) => {
   let str = '';
   for (const file of files) {
     const tempStr = `
-    import sound${files.indexOf(file)} from '../assets/${type}/${file}';`
+    import ${type}${files.indexOf(file)} from '../assets/${type}/${file}';`
     str = str + tempStr;
   }
   return str;
