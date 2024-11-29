@@ -60,49 +60,49 @@ const MainContents = () => {
       <StandardAudioPlayerPanel
         sounds={[bgm0]}
         defVol={0.2}
-        dispName={"1_1000miles_L_1127.mp3"}
+        dispName={"通常店内_1000miles"}
         bgColor={"case1"}
       />
       <StandardAudioPlayerPanel
         sounds={[bgm3]}
         defVol={0.2}
-        dispName={"2_Funkeriffic_L_1127_.mp3"}
+        dispName={"ジャズ2_Funkeriffic"}
         bgColor={"case2"}
       />
       <StandardAudioPlayerPanel
         sounds={[bgm4]}
         defVol={0.2}
-        dispName={"3_Swing_Man_1112.mp3"}
+        dispName={"ジャズ3_Swing_Man（寅山）"}
         bgColor={"case3"}
       />
       <StandardAudioPlayerPanel
         sounds={[bgm5]}
         defVol={0.1}
-        dispName={"4_ceux_beatloop_1112.mp3"}
+        dispName={"ジャズ4_ceux（占い）"}
         bgColor={"case4"}
       />
       <StandardAudioPlayerPanel
         sounds={[bgm6]}
         defVol={0.15}
-        dispName={"5_Compy_2loop_1112.mp3"}
+        dispName={"ジャズ5_Compy（後藤）"}
         bgColor={"case5"}
       />
       <StandardAudioPlayerPanel
         sounds={[bgm7]}
         defVol={0.2}
-        dispName={"6_JackHarmon_1112.mp3"}
+        dispName={"ジャズ6A_旅立ち"}
         bgColor={"case6"}
       />
       <StandardAudioPlayerPanel
         sounds={[bgm8]}
         defVol={0.1}
-        dispName={"6_SwingSt_L_1127.mp3"}
+        dispName={"ジャズ6B_仲よし"}
         bgColor={"case6"}
       />
       <StandardAudioPlayerPanel
         sounds={[bgm10]}
         defVol={1.0}
-        dispName={"7_FESTA_1112.mp3"}
+        dispName={"7_FESTA_カーテンコール"}
         bgColor={"case7"}
       />
     </>
@@ -111,51 +111,51 @@ const MainContents = () => {
   const ses = (
     <>
       <StandardAudioPlayerPanel
-        sounds={[se0]}
-        defVol={0.2}
-        dispName={"se_EnterBell.mp3"}
-        bgColor={"casese"}
-      />
-      <StandardAudioPlayerPanel
-        sounds={[se1]}
-        defVol={0.2}
-        dispName={"se_EnterBellAndNoise.mp3"}
-        bgColor={"casese"}
-      />
-      <StandardAudioPlayerPanel
-        sounds={[se3]}
-        defVol={0.1}
-        dispName={"se_cafeSound.mp3"}
-        bgColor={"casese"}
-      />
-      <StandardAudioPlayerPanel
-        sounds={[se4]}
-        defVol={0.8}
-        dispName={"se_chimeTwice.mp3"}
-        bgColor={"casese"}
-      />
-      <StandardAudioPlayerPanel
         sounds={[se5]}
         defVol={0.8}
-        dispName={"se_click.mp3"}
-        bgColor={"casese"}
-      />
-      <StandardAudioPlayerPanel
-        sounds={[se6]}
-        defVol={0.8}
-        dispName={"se_slowDownClick.mp3"}
-        bgColor={"casese"}
-      />
-      <StandardAudioPlayerPanel
-        sounds={[se7]}
-        defVol={0.1}
-        dispName={"se_soto1127.mp3"}
+        dispName={"カチコチ"}
         bgColor={"casese"}
       />
       <StandardAudioPlayerPanel
         sounds={[se9]}
         defVol={0.4}
-        dispName={"se_windWindow1127.mp3"}
+        dispName={"風の音"}
+        bgColor={"casese"}
+      />
+      <StandardAudioPlayerPanel
+        sounds={[se4]}
+        defVol={0.8}
+        dispName={"時報２回"}
+        bgColor={"casese"}
+      />
+      <StandardAudioPlayerPanel
+        sounds={[se6]}
+        defVol={0.8}
+        dispName={"カチコチテンポ下がる"}
+        bgColor={"casese"}
+      />
+      <StandardAudioPlayerPanel
+        sounds={[se0]}
+        defVol={0.2}
+        dispName={"チリン"}
+        bgColor={"casese"}
+      />
+      <StandardAudioPlayerPanel
+        sounds={[se7]}
+        defVol={0.1}
+        dispName={"外の音"}
+        bgColor={"casese"}
+      />
+      <StandardAudioPlayerPanel
+        sounds={[se3]}
+        defVol={0.1}
+        dispName={"カフェ雑音"}
+        bgColor={"casese"}
+      />
+      <StandardAudioPlayerPanel
+        sounds={[se1]}
+        defVol={0.2}
+        dispName={"チリン（雑踏あり）"}
         bgColor={"casese"}
       />
     </>
