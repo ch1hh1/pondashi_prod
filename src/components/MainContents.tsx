@@ -71,7 +71,7 @@ const MainContents = () => {
       />
       <StandardAudioPlayerPanel
         sounds={[bgm4]}
-        defVol={0.2}
+        defVol={0.1}
         dispName={"ジャズ3_Swing_Man（寅山）"}
         bgColor={"case3"}
       />
@@ -90,13 +90,13 @@ const MainContents = () => {
       <StandardAudioPlayerPanel
         sounds={[bgm7]}
         defVol={0.2}
-        dispName={"ジャズ6A_旅立ち"}
+        dispName={"ジャズ6A_JackHamon旅立ち"}
         bgColor={"case6"}
       />
       <StandardAudioPlayerPanel
         sounds={[bgm8]}
         defVol={0.1}
-        dispName={"ジャズ6B_仲よし"}
+        dispName={"ジャズ6B_SwingSt仲よし"}
         bgColor={"case6"}
       />
       <StandardAudioPlayerPanel
@@ -150,6 +150,12 @@ const MainContents = () => {
         sounds={[se3]}
         defVol={0.1}
         dispName={"カフェ雑音"}
+        bgColor={"casese"}
+      />
+      <StandardAudioPlayerPanel
+        sounds={[se5]}
+        defVol={0.3}
+        dispName={"カチコチ小さく"}
         bgColor={"casese"}
       />
       <StandardAudioPlayerPanel

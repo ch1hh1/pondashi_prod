@@ -129,7 +129,7 @@ const StandardAudioPlayerPanel = ({
             isFading={isFading}
             onClick={handlePlaying}
           />
-          <AudioControlButton
+          {/* <AudioControlButton
             icon={isPlaying ? <FaTurnDown /> : <FaTurnUp />}
             isFading={isFading}
             onClick={
@@ -155,7 +155,7 @@ const StandardAudioPlayerPanel = ({
                     setIsFading(false);
                   }
             }
-          />
+          /> */}
           <AudioControlButton
             icon={isPlaying ? <FaAnglesDown /> : <FaAnglesUp />}
             isFading={isFading}
