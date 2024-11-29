@@ -76,7 +76,7 @@ const StandardAudioPlayerPanel = ({
     case5: "#d0cece",
     case6: "#e8cfcb",
     case7: "#dc8a8a",
-    casese: "#beb5c9",
+    casese: "#eedaf9",
   };
   const bgChoseColor = bgColors[bgColor];
 
